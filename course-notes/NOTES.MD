@@ -27,23 +27,27 @@ TypeScript type enforcement happens at compilation time only, and only for TypeS
 
 Compilation vs. Transpilation
 
-Typescript compiled is basically the same level of abstraction
+Typescript compiled is basically the same level of abstraction vs. other languages where compiled code it not (as) human readable.
 
 ## Version Control
 
 Keeping binaries in Version control stucks
 
-We version control only the purely non-deterministic elements of the system
+We version control only the purely non-deterministic elements of the system - could be a lesson for EVLO. (mapping files, etc)
 
 Deterministic - value of multiplication 3 \* 2 = 6 - don't need to store 6
 
 We only store TypeScript, not the compiled JavaScript.
 
-One Exception - Partial Migration
+Generally migration is renaming to .ts - might not be this simple.
+
+## Debugging
+
+Source maps allow for Debugging in the browser with the TypeScript code. Maps from compiled JS to TS.
 
 Don't version control source maps!
 
-Source Maps and Deployment - Generally, no
+Source Maps and Production Deployment - Generally, no
 
 - Is it okay if the user has my source code?
 - If not obfuscating JS now. Probably OK
