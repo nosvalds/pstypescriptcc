@@ -9,9 +9,9 @@ export abstract class eventHubLogger implements ILogger
 		this.title = "Event Hub Logger";
 	}
 	
-	abstract createEvent(eventTitle: string, eventData: string, moment: number): string;
+	abstract createEvent(eventTitle: string, eventData: string, moment: number): string;  // abstract instead of JSON object
 
-	LogEvent(eventTitle: string, eventData: string, moment: number, otherThing?: string){
+	LogEvent(eventTitle: string, eventData: string, moment: number, otherThing?: string){ // ? denotes optional parameter
 		// address read from environment
 		var ehm = new Globomantics.eventHubManager();
 
@@ -26,7 +26,7 @@ export abstract class eventHubLogger implements ILogger
 		ehm.close();
 	}
 	
-	abstract createError(message: string, errorData: string, locals: string[], moment: number):string;
+	abstract createError(message: string, errorData: string, locals: string[], moment: number):string; // abstract instead of JSON object
 	
 	LogError(message: string, errorData: string, locals: string[], moment: number){
 		// address read from environment

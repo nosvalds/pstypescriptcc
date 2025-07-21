@@ -12,7 +12,7 @@ var eventHubLogger = /** @class */ (function () {
         // let moment = 12345;
         ehm.connect();
         var event = this.createEvent(eventTitle, eventData, moment); //{"title": eventTitle, "data": eventData, "moment": moment};
-        ehm.consume(JSON.stringify(event));
+        ehm.consume(event);
         ehm.close();
     };
     eventHubLogger.prototype.LogError = function (message, errorData, locals, moment) {
@@ -20,7 +20,7 @@ var eventHubLogger = /** @class */ (function () {
         var ehm = new Globomantics_EventHub_1.Globomantics.eventHubManager();
         ehm.connect();
         var event = this.createError(message, errorData, locals, moment); //{"title": message, "data": errorData + '\n' + locals.join(';'), "moment": moment};
-        ehm.consume(JSON.stringify(event));
+        ehm.consume(event);
         ehm.close();
     };
     return eventHubLogger;

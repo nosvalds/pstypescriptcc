@@ -216,3 +216,111 @@ enum bandMember = {
     /// etc.
 }
 ```
+
+# Interfaces and Generics
+
+## What are Interfaces for?
+
+On the day you need to drive a screw, you will understand the screwdriver - need to use a tool to understand it.
+
+An interface guarantees that certain methods or properties are in palce so that something else can call them in order to get its work done.
+
+ILogger - a commonly used interface
+
+Two methods, LogEvent, LogException
+
+Ship with a text logger, XML, JSON, and maybe db. I can try to predict what users might need...
+But there will always be needs you cannot predict
+Better to let them roll their own
+"Create observable evidence"
+Logged, but...where?
+You might transport the logs to a central server
+Or just broadcast directly to the EventHub in the first place
+
+## Demo - Third Party TS Interface
+
+Typescript accepts (compiles) a subset of the Interface (less parameters), but not a superset (more arguments than expected)
+
+Does not accept function overloading (more params)
+
+TypeScript is Structurally Typed (only care about members not arguments) vs. Nominally Typed (for deeper dive)
+
+### What is the difference between an interface and an abstract class?
+
+- Classic interview question!
+
+Answer: Implementation!!!
+
+- Abstract classes actually have code (or can have code in them)
+
+## Generics
+
+Getting away from "Any"
+
+```ts
+function write(contents: string) {
+  //do stuff
+}
+
+write(1234);
+// NOpe
+
+function writeNumber(contents: number) {
+  // do stuff
+}
+
+function writeBool(contents: Boolean) {
+  // do stuff
+}
+
+// and on and on
+// OR
+function write(contents: any); // we want to avoid this! Losing the information about this type.
+```
+
+Generics simple arguments
+
+```ts
+function write<Type>(arg: Type) {
+  // write type-specific stuff
+}
+
+write<String>("Niki");
+write<Number>(1);
+write<Boolean>(true);
+```
+
+Use generics when you want the benefits of typing but you want to defer the decision about the typing to the other developer
+
+## Generics Demo
+
+ICommand
+
+```ts
+export interface ICommand {
+  execute();
+}
+
+// StandUpCommand, SitDownCommand, WalkAcrosstheRoomCommand
+
+class invoker {
+  executeCommand(command: ICommand) {
+    command.execute();
+  }
+}
+```
+
+Duck Typing and Generics
+
+- Something else with an execute(something). Not strictly implementing the ICommand interface. Duck-typing
+- Having the same methods, TypeScript can make it happen.
+
+GenericInvoker.ts
+
+```ts
+export class Invoker {
+  executeCommand<Type extends ICommand>(command: Type) {
+    command.execute();
+  }
+}
+```
