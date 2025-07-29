@@ -1,6 +1,6 @@
 {
   "files": ["employees.ts"],
-  // "extends": "../master/base.json",
+  // "extends": "../master/base.json", // extends the base configuration
   /*"include": ["/myprojects/*.ts"],
   "exclude": ["/herprojects/*.ts"],*/
   "compilerOptions": {

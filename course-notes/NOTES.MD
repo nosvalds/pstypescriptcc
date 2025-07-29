@@ -324,3 +324,93 @@ export class Invoker {
   }
 }
 ```
+
+# Choosing Configuration and Compilation Options
+
+## Intro
+
+Started ground up, how people generally learn alone.
+
+Limits of this approach
+
+- Ideal framework is entirely intuitive and lore-free system. That's just not realistic. Need to learn "on the job".
+- Hopefully before was a firm foundation
+
+Details from here on out
+
+## Running the Compiler and Compilation Options
+
+Here's what we know. "translate" code. No execution of TS without transpilation (maybe a package that does this).
+
+A good understanding of the transpilation process.
+
+- Read the file
+- Enforce the rules
+- And translate it into a syntax tree.
+- A form independent of the language (could in theory translate to any lang).
+- Static analysis and more rules to enforce
+
+## Demo: A closer look at our transpilation
+
+Look at the abstract syntax tree
+
+https://ts-ast-viewer.com/
+
+https://ts-ast-viewer.com/#code/KYDwDg9gTgLgBAYwDYEMDOa4AVhTRAOwG8AoOcuAfQJQFtgAuONGKASwIHMBuMiylJ0ZwCAV1oAjXLz7kEhFlFEIY0ABQ16TRR04AaOIOFjJuAJSkKVuDAAWbNADpNwOAF4RdYL2sU7DxyN3QyEfCgBfElk4IXgXNQtoqyhgGFEoAht7J2ovMPJI6LRUz3o1ADcUJFFhHS5E33J-HJdgyurvaMKrWJDgBMtGlLSMrICBUK6oq2L4IwqqmqYTKSgGxrYAMzUAQhw8QkcHADUqtgATAEEhBY6zdca-WygIAHcRYHeAUSgXqDUAEQAFVsKHg7RqcAA5AC4ABqOAQ1wIgFQuAOEQQOaIs7nPqOAFmJIRaaNZqOCauDxI-JwboUFhgtgIdFoU5IC7XVy3GpmJgAIQgECQwBQxGJ5GG6UySLgAD4PAAGOAAMhVOI6cAAPB4AIwAJkVtMi4SAA
+
+## Configuring your project with tsconfig files
+
+### go-tos
+
+- target - What specific JS version will it emit too
+- module - What code will be emitted to make this available as a module. commonJS is old. ESnext is recommendation. For node - NodeNext.
+- allowJs - whether JS is allowed in your TS project
+- removeComments - recommend keeping these (false)
+- newline - what newline character is emitted when code is compiled CRLF or LF.
+- forceconsistent casing in file name - Linux vs. Windows - Windows Person.ts == person.ts. Linux this does not work. Make goal to get to true.
+- strict - try to always make it true, maybe set it to false while you get stuff straightened out. An umbrella option. Turn on as many of the options as you can at least.
+
+## Demo: working with tsconfig files
+
+## Using Type Declaration Files
+
+Two definitions of code we need:
+
+- Runtime code
+- A type definition (at design and compile time)
+
+Third-party libraries only guarantee runtime code
+
+The Good News - many package are including type definitions. Any at runtime (functionally). Generating type definitions is trivial when you're working in TS.
+
+The Better News - You can usually get type definitions somewhere else (https://github.com/definitelytyped).
+
+- `npm install - save-dev @types/react`
+
+Where that will get you - pretty far
+A major library either supplied or supported
+A narrow window for one with no support
+
+## Demo: Inferring Types from Type Declaration Files
+
+- How to generate type definition files
+  - Manually `tsc --declaration employees.ts` - not generally how you do in real world
+  - `"declaration": true`, in tsconfig
+- To sit along your emitted JavaScript
+- Untyped - a simple JavaScript module Beherns created
+- How we can get type definitions available
+- Use strong typing in TypeScript
+
+## Review
+
+Compilation API magic - the abstract syntax tree that the compiler generates
+
+The details of the compiler options in tsconfig
+
+The other options like file, include and exclude in tsconfig
+
+All about type declarations
+
+- How to consume them
+- How to get them
+- How to create them manually at a last resort
