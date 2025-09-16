@@ -414,3 +414,41 @@ All about type declarations
 - How to consume them
 - How to get them
 - How to create them manually at a last resort
+
+# Migrating a JavaScript Application to TypeScript
+
+## Gang of Four Patterns
+
+Patterns are tactics. Observe circumstances and derive the tatics from that.
+
+### The Patterns
+
+- Observer - subject that maintains a list of objects, when state changes the observers are all notified and can react accordingly
+- PubSub - Subscribers listen to a channel and react to changes
+
+### The Three Observers
+
+- Node server IoT data feeding to chart
+
+- Chart
+- Table
+- Console
+
+The Base Observer
+
+- receiveNotification
+  It will receive a dataPatcket (at first)
+
+Three observers:
+
+- ChartObserver
+- TableObserver
+- ConsoleObserver
+
+Adding a new one later on is very easy
+
+We are refactoring
+
+Moving from one working system to another
+
+Refactored to Observer pattern for the client app and added in TypeScript. I may need to watch this over again to really grok it... Didn't dwell much on the TypeScript parts, seemed more OOP focused.
